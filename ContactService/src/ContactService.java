@@ -3,7 +3,7 @@ import java.util.List;
 
 public class ContactService {
 	// Creates list of contacts
-	private List<Contact> contacts = new ArrayList<>();
+	private final List<Contact> contacts = new ArrayList<>();
 	
 	// Add a contact to list
 	public void addContact(Contact contact) {

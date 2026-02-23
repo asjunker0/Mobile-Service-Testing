@@ -21,9 +21,7 @@ public class TaskServiceTest {
 	void testAddDuplicateTaskID() {
 		service.addTask(task);
 		// Try to add task with same ID
-		assertThrows(IllegalArgumentException.class, ()-> {
-			service.addTask(new Task("123", "Name", "Description"));
-		});
+		assertThrows(IllegalArgumentException.class, ()-> service.addTask(new Task("123", "Name", "Description")));
 	}
 	
 	@Test
@@ -35,9 +33,7 @@ public class TaskServiceTest {
 	@Test
 	void testDeleteTaskNotFound() {
 		service.addTask(task);
-		assertThrows(IllegalArgumentException.class, () -> {
-			service.deleteTask("000");
-		});
+		assertThrows(IllegalArgumentException.class, () -> service.deleteTask("000"));
 	}
 	
 	@Test
