@@ -1,60 +1,57 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ContactService {
-	// Creates list of contacts
-	private List<Contact> contacts = new ArrayList<>();
+	// Creates hash map of contacts keyed by ID
+	private final Map<String, Contact> contacts = new HashMap<>();
 	
-	// Add a contact to list
+	// Add a contact to map
 	public void addContact(Contact contact) {
-		// Verifies that ID is unique
-		for (Contact c : contacts) {
-			if (c.getContactID().equals(contact.getContactID())) {
-				throw new IllegalArgumentException("Contact ID already exists");
-			}
-		}
-		contacts.add(contact);
+        if (contact == null || contact.getContactID() == null) {
+            throw new IllegalArgumentException("Contact and contact ID are required");
+        }
+
+        if (contacts.containsKey(contact.getContactID())) {
+            throw new IllegalArgumentException("Contact ID already exists");
+        }
+
+        contacts.put(contact.getContactID(), contact);
 	}
+
+    // Retrieve a contact by ID
+    public Contact getContact(String contactID) {
+        return contacts.get(contactID);
+    }
 	
-	// Delete a contact from list
+	// Delete a contact from hash map
 	public void deleteContact(String contactID) {
-		boolean removed = contacts.removeIf(c -> c.getContactID().equals(contactID));
-		if (!removed) {
-			throw new IllegalArgumentException("Contact not found");
-		}
+        if (contacts.remove(contactID) == null) {
+            throw new IllegalArgumentException("Contact not found");
+        }
 	}
 	
 	// Update firstName
 	public void updateFirstName(String contactID, String newFirstName) {
-		Contact contact = findContactByID(contactID);
+		Contact contact = getContact(contactID);
 		contact.setFirstName(newFirstName);
 	}
 	
 	// Update lastName
 	public void updateLastName(String contactID, String newLastName) {
-		Contact contact = findContactByID(contactID);
+		Contact contact = getContact(contactID);
 		contact.setLastName(newLastName);
 	}
 	
 	// Update number
 	public void updateNumber(String contactID, String newNumber) {
-		Contact contact = findContactByID(contactID);
+		Contact contact = getContact(contactID);
 		contact.setNumber(newNumber);
 	}
 	
 	// Update address
 	public void updateAddress(String contactID, String newAddress) {
-		Contact contact = findContactByID(contactID);
+		Contact contact = getContact(contactID);
 		contact.setAddress(newAddress);
 	}
-	
-	// Method to lookup contact by ID
-	private Contact findContactByID(String contactID) {
-		for (Contact c : contacts) {
-			if(c.getContactID().equals(contactID)) {
-				return c;
-			}
-		}
-		throw new IllegalArgumentException("Contact ID not found");
-	}
+
 }
