@@ -33,7 +33,7 @@ public class Contact {
 		this.address = address;
 	}
 	
-	// Only getter, its unable to be edited
+	// Only getter, it's unable to be edited
 	public String getContactID() {
 		return contactID;
 	}

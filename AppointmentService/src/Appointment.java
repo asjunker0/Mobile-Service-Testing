@@ -24,7 +24,7 @@ public class Appointment {
 		this.description = description;
 	}
 	
-	// Only getter, its unable to be edited
+	// Only getter, it's unable to be edited
 	// appintmentID
 	public String getAppointmentID() {
 		return appointmentID;
