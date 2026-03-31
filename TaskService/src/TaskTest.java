@@ -29,26 +29,18 @@ public class TaskTest {
 	// Negative tests
 	@Test 
 	void testTaskIDTooLong() {
-		assertThrows(IllegalArgumentException.class, () ->{
-			new Task("12345678901", "Name", "Description");
-		});
+		assertThrows(IllegalArgumentException.class, () -> new Task("12345678901", "Name", "Description"));
 	}
 	
 	@Test 
 	void testNameTooLong() { 
-		assertThrows(IllegalArgumentException.class, () ->{
-			new Task("123", "Very long invalid name", "Description");
-		});
+		assertThrows(IllegalArgumentException.class, () -> new Task("123", "Very long invalid name", "Description"));
 	}
 	@Test void testDescriptionTooLong() {
-		assertThrows(IllegalArgumentException.class, () ->{
-			new Task("123", "Name", "This description has over 50 characters and is not valid");
-		});
+		assertThrows(IllegalArgumentException.class, () -> new Task("123", "Name", "This description has over 50 characters and is not valid"));
 	}
 	@Test void testTaskIDNull() {
-		assertThrows(IllegalArgumentException.class, () ->{
-			new Task(null, "Name", "Description");
-		});
+		assertThrows(IllegalArgumentException.class, () -> new Task(null, "Name", "Description"));
 	}
 	
 	// Negative set tests

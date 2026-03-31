@@ -1,48 +1,45 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TaskService {
-	// Creates list of tasks
-	private List<Task> tasks = new ArrayList<>();
+	// Creates hash map of tasks
+	private final Map<String, Task> tasks = new HashMap<>();
 	
 	// Add a task to list
 	public void addTask(Task task) {
-		// Verifies that ID is unique
-		for (Task t : tasks) {
-			if (t.getTaskID().equals(task.getTaskID())) {
-				throw new IllegalArgumentException("Task ID already exists");
-			}
-		}
-		tasks.add(task);
+        if (task == null || task.getTaskID() == null) {
+            throw new IllegalArgumentException("Task and task ID are required");
+        }
+
+        if (tasks.containsKey(task.getTaskID())) {
+            throw new IllegalArgumentException("Task ID already exists");
+        }
+
+        tasks.put(task.getTaskID(), task);
 	}
+
+    // Retrieve a task by ID
+    public Task getTask(String taskID) {
+        return tasks.get(taskID);
+    }
 	
 	// Delete a task by ID
 	public void deleteTask(String taskID) {
-		boolean removed = tasks.removeIf(c -> c.getTaskID().equals(taskID));
-		if (!removed) {
-			throw new IllegalArgumentException("Task not found");
-		}
+        if (tasks.remove(taskID) == null) {
+            throw new IllegalArgumentException("Task not found");
+        }
 	}
 	
 	// Update name
 	public void updateName(String taskID, String newName) {
-		Task task = findTaskByID(taskID);
+		Task task = getTask(taskID);
 		task.setName(newName);
 	}
 	
 	// Update description
 	public void updateDescription(String taskID, String newDescription) {
-		Task task = findTaskByID(taskID);
+		Task task = getTask(taskID);
 		task.setDescription(newDescription);
 	}
-	
-	// Helper function to find task by ID
-	private Task findTaskByID(String taskID) {
-		for (Task t : tasks) {
-			if(t.getTaskID().equals(taskID)) {
-				return t;
-			}
-		}
-		throw new IllegalArgumentException("Task ID not found");
-	}
+
 }
