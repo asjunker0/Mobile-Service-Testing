@@ -23,8 +23,7 @@ A backend service for a mobile application with three independently tested modul
 ## Software and Tools
 - **Java 17** — For writing all the classes and unit tests.
 - **JUnit 5 (JUnit Jupiter)** — For writing and executing automated unit tests.
-- **Eclipse IDE for Java Developers** — For coding, project management, and running tests. Also used Eclipse's built-in Code Coverage tool to measure test coverage.
-- **Eclipse Code Coverage** — For line and branch coverage analysis.
+- **Eclipse IDE** — For development, test execution, and code coverage analysis
 
 ## Modules
 | Module | Responsibility |
